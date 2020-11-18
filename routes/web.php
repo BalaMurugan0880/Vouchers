@@ -125,11 +125,11 @@ Route::get('approved/{id}', 'userdisplayController@approved')->name('approved');
 Route::get('login/{provider}', 'Auth\LoginController@redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@Callback');
 
-Route::get('profile','userController@create');
-Route::post('profile','userController@update_avatar');
+Route::get('profile','userController@create')->middleware('verified');
+Route::post('profile','userController@update_avatar')->middleware('verified');
 
-Route::get('/vendorpanel', 'vendorpanelController@addvoucher_table');
-Route::post('/vendorpanel', 'vendorpanelController@store');
+Route::get('/vendorpanel', 'vendorpanelController@addvoucher_table')->middleware('verified');
+Route::post('/vendorpanel', 'vendorpanelController@store')->middleware('verified');
 
 Route::get('package', 'PaymentController@index')->middleware('verified');
 Route::post('charge', 'PaymentController@charge')->middleware('verified');
