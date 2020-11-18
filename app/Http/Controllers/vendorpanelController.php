@@ -27,10 +27,13 @@ class vendorpanelController extends Controller
 
         $test = DB::table('users')->select('addvoucher_count','vendorType')->where(['users.id' => $userid])->get();
         $total_redeemed = $data->sum('is_redeemed');
+        $vouchersqty =  DB::table('addvouchers')->select('quantity')->where(['user_id' => $userid])->get();
+        $totalqty = $data->sum('is_redeemed + quantity');
+       
 
    	 
 
-   	 return view('/vendor/vendorpanel',compact('data', 'test', 'total_redeemed'));
+   	 return view('/vendor/vendorpanel',compact('data', 'test', 'total_redeemed', 'vouchersqty', 'totalqty'));
    }
 
 
